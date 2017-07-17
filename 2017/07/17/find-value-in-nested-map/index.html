@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="xia ji ba xie 0"/>
+  <meta name="description" content="find value in nested map"/>
 
 
 
@@ -29,19 +29,19 @@
 
 
 
-<link rel="canonical" href="https://zhiruchen.github.io/2017/07/12/xia-ji-ba-xie-0/"/>
+<link rel="canonical" href="https://zhiruchen.github.io/2017/07/17/find-value-in-nested-map/"/>
 
 
-<meta name="description" content="today is a good day.tomorrow will also be a good day.so, what should a prorgammer write about.and, to be a real programmer is hard…, I know it.and, I am on the way to be a real programmer, I think.">
+<meta name="description" content="在一个嵌套的map中根据输入的路径找到相应的值123456789101112func FindValue(m map[string]interface&amp;#123;&amp;#125;, path string) interface&amp;#123;&amp;#125; &amp;#123;    keys := strings.Split(path, &quot;.&quot;)    if len(keys) &amp;gt; 1 &amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xia ji ba xie 0">
-<meta property="og:url" content="https://zhiruchen.github.io/2017/07/12/xia-ji-ba-xie-0/index.html">
+<meta property="og:title" content="find value in nested map">
+<meta property="og:url" content="https://zhiruchen.github.io/2017/07/17/find-value-in-nested-map/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
-<meta property="og:description" content="today is a good day.tomorrow will also be a good day.so, what should a prorgammer write about.and, to be a real programmer is hard…, I know it.and, I am on the way to be a real programmer, I think.">
-<meta property="og:updated_time" content="2017-07-12T15:11:24.000Z">
+<meta property="og:description" content="在一个嵌套的map中根据输入的路径找到相应的值123456789101112func FindValue(m map[string]interface&amp;#123;&amp;#125;, path string) interface&amp;#123;&amp;#125; &amp;#123;    keys := strings.Split(path, &quot;.&quot;)    if len(keys) &amp;gt; 1 &amp;#123;">
+<meta property="og:updated_time" content="2017-07-17T13:55:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xia ji ba xie 0">
-<meta name="twitter:description" content="today is a good day.tomorrow will also be a good day.so, what should a prorgammer write about.and, to be a real programmer is hard…, I know it.and, I am on the way to be a real programmer, I think.">
+<meta name="twitter:title" content="find value in nested map">
+<meta name="twitter:description" content="在一个嵌套的map中根据输入的路径找到相应的值123456789101112func FindValue(m map[string]interface&amp;#123;&amp;#125;, path string) interface&amp;#123;&amp;#125; &amp;#123;    keys := strings.Split(path, &quot;.&quot;)    if len(keys) &amp;gt; 1 &amp;#123;">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -68,7 +68,7 @@
 
 
 
-    <title> xia ji ba xie 0 · zbbbbbblog </title>
+    <title> find value in nested map · zbbbbbblog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -149,13 +149,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          xia ji ba xie 0
+          find value in nested map
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017年7月12日
+          2017年7月17日
         </span>
       </div>
     </header>
@@ -165,14 +165,15 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#today-is-a-good-day"><span class="toc-text">today is a good day.</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tomorrow-will-also-be-a-good-day"><span class="toc-text">tomorrow will also be a good day.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#so-what-should-a-prorgammer-write-about"><span class="toc-text">so, what should a prorgammer write about.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#and-to-be-a-real-programmer-is-hard…-I-know-it"><span class="toc-text">and, to be a real programmer is hard…, I know it.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#and-I-am-on-the-way-to-be-a-real-programmer-I-think"><span class="toc-text">and, I am on the way to be a real programmer, I think.</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在一个嵌套的map中根据输入的路径找到相应的值"><span class="toc-text">在一个嵌套的map中根据输入的路径找到相应的值</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <h1 id="today-is-a-good-day"><a href="#today-is-a-good-day" class="headerlink" title="today is a good day."></a>today is a good day.</h1><h2 id="tomorrow-will-also-be-a-good-day"><a href="#tomorrow-will-also-be-a-good-day" class="headerlink" title="tomorrow will also be a good day."></a>tomorrow will also be a good day.</h2><h3 id="so-what-should-a-prorgammer-write-about"><a href="#so-what-should-a-prorgammer-write-about" class="headerlink" title="so, what should a prorgammer write about."></a>so, what should a prorgammer write about.</h3><h3 id="and-to-be-a-real-programmer-is-hard…-I-know-it"><a href="#and-to-be-a-real-programmer-is-hard…-I-know-it" class="headerlink" title="and, to be a real programmer is hard…, I know it."></a>and, to be a real programmer is hard…, I know it.</h3><h3 id="and-I-am-on-the-way-to-be-a-real-programmer-I-think"><a href="#and-I-am-on-the-way-to-be-a-real-programmer-I-think" class="headerlink" title="and, I am on the way to be a real programmer, I think."></a>and, I am on the way to be a real programmer, I think.</h3>
+        <h1 id="在一个嵌套的map中根据输入的路径找到相应的值"><a href="#在一个嵌套的map中根据输入的路径找到相应的值" class="headerlink" title="在一个嵌套的map中根据输入的路径找到相应的值"></a>在一个嵌套的map中根据输入的路径找到相应的值</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindValue</span><span class="params">(m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;, path <span class="keyword">string</span>)</span> <span class="title">interface</span></span>&#123;&#125; &#123;</div><div class="line">    keys := strings.Split(path, <span class="string">"."</span>)</div><div class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(keys) &gt; <span class="number">1</span> &#123;</div><div class="line">        v := m[keys[<span class="number">0</span>]]</div><div class="line">        v1, ok := v.(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</div><div class="line">        <span class="keyword">if</span> !ok &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> FindValue(v1, strings.Join(keys[<span class="number">1</span>:], <span class="string">"."</span>))</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> m[keys[<span class="number">0</span>]]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -193,15 +194,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/07/17/find-value-in-nested-map/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">find value in nested map</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2017/07/12/hello-world/">
-        <span class="next-text nav-default">Hello World</span>
+      <a class="next" href="/2017/07/12/xia-ji-ba-xie-0/">
+        <span class="next-text nav-default">xia ji ba xie 0</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
