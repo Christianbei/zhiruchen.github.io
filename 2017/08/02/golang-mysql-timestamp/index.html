@@ -12,6 +12,8 @@
 
 
 
+  <meta name="description" content="golang mysql timestamp"/>
+
 
 
 
@@ -27,15 +29,19 @@
 
 
 
-<link rel="canonical" href="https://zhiruchen.github.io/"/>
+<link rel="canonical" href="https://zhiruchen.github.io/2017/08/02/golang-mysql-timestamp/"/>
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbbbbbblog">
-<meta property="og:url" content="https://zhiruchen.github.io/index.html">
+<meta name="description" content="问题: ​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。 原因: ​       查看连接数据库的dsn: &amp;quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;amp;loc=Local&amp;amp;parseTime=true&amp;quot;,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang mysql timestamp">
+<meta property="og:url" content="https://zhiruchen.github.io/2017/08/02/golang-mysql-timestamp/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
+<meta property="og:description" content="问题: ​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。 原因: ​       查看连接数据库的dsn: &amp;quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;amp;loc=Local&amp;amp;parseTime=true&amp;quot;,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的">
+<meta property="og:updated_time" content="2017-08-02T03:16:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zbbbbbblog">
+<meta name="twitter:title" content="golang mysql timestamp">
+<meta name="twitter:description" content="问题: ​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。 原因: ​       查看连接数据库的dsn: &amp;quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;amp;loc=Local&amp;amp;parseTime=true&amp;quot;,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -62,7 +68,7 @@
 
 
 
-    <title> zbbbbbblog </title>
+    <title> golang mysql timestamp · zbbbbbblog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -138,14 +144,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2017/08/02/golang-mysql-timestamp/">golang mysql timestamp</a>
+          golang mysql timestamp
         
       </h1>
 
@@ -161,115 +165,54 @@
 
     <div class="post-content">
       
-        
-        
-
-        
-          <p>问题:</p>
+        <p>问题:</p>
 <p>​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。</p>
 <p>原因:</p>
 <p>​       查看连接数据库的dsn: <code>&quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=Local&amp;parseTime=true&quot;</code>,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的当前时间戳减去记录的时间戳，Duration变成负值。</p>
 <p>解决:</p>
 <p>​     dsn改为: <code>%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=UTC&amp;parseTime=true</code></p>
 
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/07/23/windows-netsh-reset/">windows netsh reset</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年7月23日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
       
-        
-        
 
-        
-          <p>Windows连接wifi后显示无Internet，但是手机能连接上网络。<br>解决办法: 一管理员权限启动cmd，输入<code>netsh winsock reset</code>, 重启电脑~</p>
 
-        
+
       
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/07/17/find-value-in-nested-map/">find value in nested map</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年7月17日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <h1 id="在一个嵌套的map中根据输入的路径找到相应的值"><a href="#在一个嵌套的map中根据输入的路径找到相应的值" class="headerlink" title="在一个嵌套的map中根据输入的路径找到相应的值"></a>在一个嵌套的map中根据输入的路径找到相应的值</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindValue</span><span class="params">(m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;, path <span class="keyword">string</span>)</span> <span class="title">interface</span></span>&#123;&#125; &#123;</div><div class="line">    keys := strings.Split(path, <span class="string">"."</span>)</div><div class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(keys) &gt; <span class="number">1</span> &#123;</div><div class="line">        v := m[keys[<span class="number">0</span>]]</div><div class="line">        v1, ok := v.(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</div><div class="line">        <span class="keyword">if</span> !ok &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> FindValue(v1, strings.Join(keys[<span class="number">1</span>:], <span class="string">"."</span>))</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> m[keys[<span class="number">0</span>]]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-        
-      
-    </div>
-
     
 
     
-
-  </article>
-
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2017/07/23/windows-netsh-reset/">
+        <span class="next-text nav-default">windows netsh reset</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
+
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>  
       </main>
@@ -344,6 +287,8 @@
     </div>
 
     
+  
+
 
 
     
