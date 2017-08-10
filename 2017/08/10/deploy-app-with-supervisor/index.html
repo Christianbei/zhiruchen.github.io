@@ -12,6 +12,8 @@
 
 
 
+  <meta name="description" content="deploy app with supervisor"/>
+
 
 
 
@@ -27,15 +29,19 @@
 
 
 
-<link rel="canonical" href="https://zhiruchen.github.io/archives/2017/07/"/>
+<link rel="canonical" href="https://zhiruchen.github.io/2017/08/10/deploy-app-with-supervisor/"/>
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbbbbbblog">
-<meta property="og:url" content="https://zhiruchen.github.io/archives/2017/07/index.html">
+<meta name="description" content="拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器 supervisor的配置  12345678910111213[program:app_name]command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.tomldirectory=/data/a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deploy app with supervisor">
+<meta property="og:url" content="https://zhiruchen.github.io/2017/08/10/deploy-app-with-supervisor/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
+<meta property="og:description" content="拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器 supervisor的配置  12345678910111213[program:app_name]command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.tomldirectory=/data/a">
+<meta property="og:updated_time" content="2017-08-10T12:45:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zbbbbbblog">
+<meta name="twitter:title" content="deploy app with supervisor">
+<meta name="twitter:description" content="拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器 supervisor的配置  12345678910111213[program:app_name]command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.tomldirectory=/data/a">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -62,11 +68,7 @@
 
 
 
-    <title>
-  
-    归档 · zbbbbbblog
-  
-</title>
+    <title> deploy app with supervisor · zbbbbbblog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -143,76 +145,81 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <h2 class="archive-name"> All </h2>
-          <span class="archive-post-counter">
-            目前共计 5 篇日志
-          </span>
-        </div>
-      
-    
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          deploy app with supervisor
+        
+      </h1>
 
-    
-      
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2017</h2>
-          </div>
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            07-23
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/07/23/windows-netsh-reset/" class="archive-post-link">
-            windows netsh reset
-          </a>
+      <div class="post-meta">
+        <span class="post-time">
+          2017年8月10日
         </span>
       </div>
-    
-      
-        
-        
+    </header>
 
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            07-17
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/07/17/find-value-in-nested-map/" class="archive-post-link">
-            find value in nested map
-          </a>
-        </span>
-      </div>
     
-  </section>
+    
 
-  
-  <nav class="pagination">
+    <div class="post-content">
+      
+        <ul>
+<li>拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器</li>
+<li>supervisor的配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[program:app_name]</div><div class="line">command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.toml</div><div class="line">directory=/data/apps/app_name</div><div class="line">autostart=true</div><div class="line">autorestart=true</div><div class="line">startsecs=10</div><div class="line">startretries=3</div><div class="line">stdout_logfile=/data/logs/supervisor/app_name/access.log</div><div class="line">stdout_logfile_maxbytes=100MB</div><div class="line">stdout_logfile_backups=20</div><div class="line">stderr_logfile=/data/logs/supervisor/app_name/stderr.log</div><div class="line">stderr_logfile_maxbytes=100MB</div><div class="line">stderr_logfile_backups=2</div></pre></td></tr></table></figure>
+<ul>
+<li>更新supervisor配置</li>
+</ul>
+<p><code>supervisorctl update</code></p>
+<ul>
+<li>查看启动状态</li>
+</ul>
+<p><code>supervisorctl status</code></p>
+
+      
+    </div>
+
     
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/08/08/golang-mutex/">
+        <span class="next-text nav-default">golang mutex</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>  
       </main>
@@ -287,6 +294,8 @@
     </div>
 
     
+  
+
 
 
     
