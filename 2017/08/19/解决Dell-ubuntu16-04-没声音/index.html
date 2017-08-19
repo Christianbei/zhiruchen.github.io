@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="软件工程师的成长"/>
+  <meta name="description" content="解决Dell ubuntu16.04 没声音"/>
 
 
 
@@ -29,19 +29,19 @@
 
 
 
-<link rel="canonical" href="https://zhiruchen.github.io/2017/08/16/软件工程师的成长/"/>
+<link rel="canonical" href="https://zhiruchen.github.io/2017/08/19/解决Dell-ubuntu16-04-没声音/"/>
 
 
-<meta name="description" content="ref: https://www.zhihu.com/lives/879002504849915904 心态 乐观 建立自信  方法论 自律(坚忍不拔之志)，时间规划 注重基础知识的学习 学习解决问题过程中遇到的各个知识点 对比学习，比如各个语言的并发模型的不同之处 教给别人  读书 带着问题去读 如何阅读一本书">
+<meta name="description" content="在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。解决办法如下:  安装 pulseaudio 12sudo apt-get purge pulseaudiosudo apt-get clean &amp;amp;&amp;amp; sudo apt-get autoremove  然后重启ubuntu  启动 &amp;amp; 配置 pulseaudio 1234rm -r ~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软件工程师的成长">
-<meta property="og:url" content="https://zhiruchen.github.io/2017/08/16/软件工程师的成长/index.html">
+<meta property="og:title" content="解决Dell ubuntu16.04 没声音">
+<meta property="og:url" content="https://zhiruchen.github.io/2017/08/19/解决Dell-ubuntu16-04-没声音/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
-<meta property="og:description" content="ref: https://www.zhihu.com/lives/879002504849915904 心态 乐观 建立自信  方法论 自律(坚忍不拔之志)，时间规划 注重基础知识的学习 学习解决问题过程中遇到的各个知识点 对比学习，比如各个语言的并发模型的不同之处 教给别人  读书 带着问题去读 如何阅读一本书">
-<meta property="og:updated_time" content="2017-08-16T13:55:36.000Z">
+<meta property="og:description" content="在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。解决办法如下:  安装 pulseaudio 12sudo apt-get purge pulseaudiosudo apt-get clean &amp;amp;&amp;amp; sudo apt-get autoremove  然后重启ubuntu  启动 &amp;amp; 配置 pulseaudio 1234rm -r ~">
+<meta property="og:updated_time" content="2017-08-19T08:48:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软件工程师的成长">
-<meta name="twitter:description" content="ref: https://www.zhihu.com/lives/879002504849915904 心态 乐观 建立自信  方法论 自律(坚忍不拔之志)，时间规划 注重基础知识的学习 学习解决问题过程中遇到的各个知识点 对比学习，比如各个语言的并发模型的不同之处 教给别人  读书 带着问题去读 如何阅读一本书">
+<meta name="twitter:title" content="解决Dell ubuntu16.04 没声音">
+<meta name="twitter:description" content="在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。解决办法如下:  安装 pulseaudio 12sudo apt-get purge pulseaudiosudo apt-get clean &amp;amp;&amp;amp; sudo apt-get autoremove  然后重启ubuntu  启动 &amp;amp; 配置 pulseaudio 1234rm -r ~">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -68,7 +68,7 @@
 
 
 
-    <title> 软件工程师的成长 · zbbbbbblog </title>
+    <title> 解决Dell ubuntu16.04 没声音 · zbbbbbblog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -149,13 +149,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          软件工程师的成长
+          解决Dell ubuntu16.04 没声音
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017年8月16日
+          2017年8月19日
         </span>
       </div>
     </header>
@@ -165,28 +165,29 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#心态"><span class="toc-text">心态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法论"><span class="toc-text">方法论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#读书"><span class="toc-text">读书</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#参考网址"><span class="toc-text">参考网址</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <p>ref: <a href="https://www.zhihu.com/lives/879002504849915904" target="_blank" rel="external">https://www.zhihu.com/lives/879002504849915904</a></p>
-<h1 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h1><ul>
-<li>乐观</li>
-<li>建立自信</li>
+        <p>在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。<br>解决办法如下:</p>
+<ul>
+<li><p>安装 pulseaudio</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get purge pulseaudio</div><div class="line">sudo apt-get clean &amp;&amp; sudo apt-get autoremove</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后重启ubuntu</p>
+</li>
+<li><p>启动 &amp; 配置 pulseaudio</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse</div><div class="line">sudo apt-get install pulseaudio</div><div class="line">sudo alsa force-reload</div><div class="line">pavucontrol</div></pre></td></tr></table></figure>
+</li>
+<li><p>如何配置<br>参考: <a href="http://blog.csdn.net/darmao/article/details/77199442" target="_blank" rel="external">http://blog.csdn.net/darmao/article/details/77199442</a></p>
+</li>
 </ul>
-<h1 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h1><ul>
-<li>自律(坚忍不拔之志)，时间规划</li>
-<li>注重基础知识的学习</li>
-<li>学习解决问题过程中遇到的各个知识点</li>
-<li>对比学习，比如各个语言的并发模型的不同之处</li>
-<li>教给别人</li>
-</ul>
-<h1 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h1><ul>
-<li>带着问题去读</li>
-<li>如何阅读一本书</li>
+<p>终于有声音了。。。</p>
+<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
+<li><a href="https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04" target="_blank" rel="external">https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04</a></li>
 </ul>
 
       
@@ -209,15 +210,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/08/19/解决Dell-ubuntu16-04-没声音/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">解决Dell ubuntu16.04 没声音</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2017/08/14/mysql-select-for-update/">
-        <span class="next-text nav-default">mysql select for update</span>
+      <a class="next" href="/2017/08/16/软件工程师的成长/">
+        <span class="next-text nav-default">软件工程师的成长</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
