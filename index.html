@@ -145,6 +145,156 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/09/28/regex-match-单引号/">regex match 单引号</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年9月28日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h1 id="正则表达式匹配单引号"><a href="#正则表达式匹配单引号" class="headerlink" title="正则表达式匹配单引号"></a>正则表达式匹配单引号</h1><p>正在做一个<a href="http://exercism.io/exercises/go/word-count/readme" target="_blank" rel="external">word-count</a>的题目, 遇到匹配出单词的问题，但是测试的时候发现需要匹配到单词里的单引号. 奈何不是很懂正则，就stackoverflow了一下.</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"regexp"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	re := regexp.MustCompile(<span class="string">"[a-zA-Z']+|\\d+"</span>)</div><div class="line">	fmt.Println(re.FindAllString(<span class="string">"paranormal, yes, you, right, 1, 3, can't, 'en'"</span>, <span class="number">-1</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// [paranormal yes you right 1 3 can't 'en']</span></div></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/09/12/gogland-使用问题/">gogland 使用问题</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年9月12日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/09/12/golang-负数-取模/">golang 负数 取模</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年9月12日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/09/11/go-chi-request-data-validator-middleware/">go-chi request data validator middleware</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年9月11日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/09/11/httpie-使用/">使用 httpie 测试http请求</a>
         
       </h1>
@@ -396,174 +546,6 @@
 
         
           <h1 id="mysql-select-for-update"><a href="#mysql-select-for-update" class="headerlink" title="mysql select for update"></a>mysql select for update</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>需要读取并更新表中某个字段, 但是如果在一个事务中分开执行这个操作，就会造成，数据覆盖的问题。</p>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/10/deploy-app-with-supervisor/">deploy app with supervisor</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月10日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <ul>
-<li>拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器</li>
-<li>supervisor的配置</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[program:app_name]</div><div class="line">command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.toml</div><div class="line">directory=/data/apps/app_name</div><div class="line">autostart=true</div><div class="line">autorestart=true</div><div class="line">startsecs=10</div><div class="line">startretries=3</div><div class="line">stdout_logfile=/data/logs/supervisor/app_name/access.log</div><div class="line">stdout_logfile_maxbytes=100MB</div><div class="line">stdout_logfile_backups=20</div><div class="line">stderr_logfile=/data/logs/supervisor/app_name/stderr.log</div><div class="line">stderr_logfile_maxbytes=100MB</div><div class="line">stderr_logfile_backups=2</div></pre></td></tr></table></figure>
-<ul>
-<li>更新supervisor配置</li>
-</ul>
-<p><code>supervisorctl update</code></p>
-<ul>
-<li>查看启动状态</li>
-</ul>
-<p><code>supervisorctl status</code></p>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/08/golang-mutex/">golang mutex</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月8日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <h1 id="golang-多线程同步"><a href="#golang-多线程同步" class="headerlink" title="golang 多线程同步"></a>golang 多线程同步</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/02/golang-mysql-timestamp/">golang mysql timestamp</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月2日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>问题:</p>
-<p>​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。</p>
-<p>原因:</p>
-<p>​       查看连接数据库的dsn: <code>&quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=Local&amp;parseTime=true&quot;</code>,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的当前时间戳减去记录的时间戳，Duration变成负值。</p>
-<p>解决:</p>
-<p>​     dsn改为: <code>%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=UTC&amp;parseTime=true</code></p>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/07/23/windows-netsh-reset/">windows netsh reset</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年7月23日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>Windows连接wifi后显示无Internet，但是手机能连接上网络。<br>解决办法: 一管理员权限启动cmd，输入<code>netsh winsock reset</code>, 重启电脑~</p>
 
         
       
