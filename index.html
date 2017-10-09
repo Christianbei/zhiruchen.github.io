@@ -145,6 +145,44 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/10/09/mysql-ORDER-BY-clause-is-not-in-SELECT-list/">mysql ORDER BY clause is not in SELECT list</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年10月9日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">修改my.conf</div><div class="line">增加配置:</div><div class="line"><span class="meta">#</span> Default Homebrew MySQL server config</div><div class="line">[mysqld]</div><div class="line"><span class="meta">#</span> Only allow connections from localhost</div><div class="line">bind-address = 127.0.0.1</div><div class="line">sql-mode=""</div><div class="line"></div><div class="line">重新启动mysql</div><div class="line">mysql.server restart</div></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/09/28/regex-match-单引号/">regex match 单引号</a>
         
       </h1>
@@ -508,44 +546,6 @@
 <li>带着问题去读</li>
 <li>如何阅读一本书</li>
 </ul>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/14/mysql-select-for-update/">mysql select for update</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月14日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <h1 id="mysql-select-for-update"><a href="#mysql-select-for-update" class="headerlink" title="mysql select for update"></a>mysql select for update</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>需要读取并更新表中某个字段, 但是如果在一个事务中分开执行这个操作，就会造成，数据覆盖的问题。</p>
 
         
       
