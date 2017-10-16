@@ -145,6 +145,45 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/10/15/goroutines/">goroutines</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年10月15日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h1 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h1><p>我理解的goroutine就是一个和其他goroutine并发运行的函数.</p>
+<h1 id="goroutine-和线程的区别"><a href="#goroutine-和线程的区别" class="headerlink" title="goroutine 和线程的区别"></a>goroutine 和线程的区别</h1><p>参考: <a href="http://blog.nindalf.com/how-goroutines-work/" target="_blank" rel="external">http://blog.nindalf.com/how-goroutines-work/</a></p>
+<h1 id="启动一个goroutine"><a href="#启动一个goroutine" class="headerlink" title="启动一个goroutine"></a>启动一个goroutine</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">    <span class="string">"time"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">        fmt.Println(<span class="string">"Hello, Goroutine!"</span>)</div><div class="line">    &#125;()</div><div class="line">    time.Sleep(<span class="number">1</span> * time.Second)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/10/09/mysql-ORDER-BY-clause-is-not-in-SELECT-list/">mysql ORDER BY clause is not in SELECT list</a>
         
       </h1>
@@ -500,59 +539,6 @@
 <p>终于有声音了。。。</p>
 <h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
 <li><a href="https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04" target="_blank" rel="external">https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04</a></li>
-</ul>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/16/软件工程师的成长/">软件工程师的成长</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月16日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>ref: <a href="https://www.zhihu.com/lives/879002504849915904" target="_blank" rel="external">https://www.zhihu.com/lives/879002504849915904</a></p>
-<h1 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h1><ul>
-<li>乐观</li>
-<li>建立自信</li>
-</ul>
-<h1 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h1><ul>
-<li>自律(坚忍不拔之志)，时间规划</li>
-<li>注重基础知识的学习</li>
-<li>学习解决问题过程中遇到的各个知识点</li>
-<li>对比学习，比如各个语言的并发模型的不同之处</li>
-<li>教给别人</li>
-</ul>
-<h1 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h1><ul>
-<li>带着问题去读</li>
-<li>如何阅读一本书</li>
 </ul>
 
         
