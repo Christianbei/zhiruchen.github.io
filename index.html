@@ -145,6 +145,46 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/10/21/go-concurrency-semaphore-pattern/">go concurrency semaphore pattern</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年10月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>在main函数中开启一个用于计算的goroutine, 为了让main方法知道什么时候计算完成了，在compute方法中传入一个channel参数，在main方法中取channel的值.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int64</span>)</div><div class="line">	<span class="keyword">go</span> sum([]<span class="keyword">int64</span>&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">10</span>&#125;, ch)</div><div class="line"></div><div class="line">	fmt.Printf(<span class="string">"sum = %d\n"</span>, &lt;-ch)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(numbers []<span class="keyword">int64</span>, sum <span class="keyword">chan</span> <span class="keyword">int64</span>)</span></span> &#123;</div><div class="line">	total := <span class="keyword">int64</span>(<span class="number">0</span>)</div><div class="line">	<span class="keyword">for</span> _, n := <span class="keyword">range</span> numbers &#123;</div><div class="line">		total += n</div><div class="line">		time.Sleep(time.Millisecond)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sum &lt;- total</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了并发的计算一个切片中每个元素，重新得到一个新的切片。设置一个和切片同数量的chan 切片，没完成一个元素的计算，就给chan切片的元素发送一个信号，表示这个元素的值计算完成了。在main中，用for loop接受chan切片每个元素中发送的值.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Empty <span class="keyword">interface</span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> empty Empty</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	N := <span class="number">10</span></div><div class="line">	data := <span class="built_in">make</span>([]<span class="keyword">int64</span>, N)</div><div class="line">	sem := <span class="built_in">make</span>(<span class="keyword">chan</span> Empty, N)</div><div class="line">	res := <span class="built_in">make</span>([]<span class="keyword">int64</span>, N)</div><div class="line"></div><div class="line">	rand.Seed(<span class="number">42</span>)</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; N; i++ &#123;</div><div class="line">		data[i] = rand.Int63n(<span class="number">100</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> i, n := <span class="keyword">range</span> data &#123;</div><div class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>, n <span class="keyword">int64</span>)</span></span> &#123;</div><div class="line">			fmt.Printf(<span class="string">"calculating %d, %d\n"</span>, i, n)</div><div class="line">			res[i] = doSomeCalculate(i, n)</div><div class="line">			sem &lt;- empty</div><div class="line">		&#125;(i, n)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= N; i++ &#123;</div><div class="line">		&lt;-sem</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Printf(<span class="string">"after all calculation done!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomeCalculate</span><span class="params">(i <span class="keyword">int</span>, n <span class="keyword">int64</span>)</span> <span class="title">int64</span></span> &#123;</div><div class="line">	v := <span class="keyword">int64</span>(i) * n</div><div class="line">	time.Sleep(<span class="number">100</span> * time.Millisecond)</div><div class="line">	<span class="keyword">return</span> v</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/10/15/goroutines/">goroutines</a>
         
       </h1>
@@ -487,60 +527,6 @@
         
           <h1 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">type</span> YourRecord <span class="keyword">struct</span> &#123;</div><div class="line">    ID        <span class="keyword">string</span>    <span class="string">`gorm:"size:36;primary_key"`</span></div><div class="line">	Field1    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field1"`</span></div><div class="line">	Field2    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field2;index"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(FileFieldCopy)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"record_t"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">BulkCreateRecords</span><span class="params">(rs []*YourRecord)</span> <span class="title">error</span></span> &#123;</div><div class="line">	valueStrings := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	valueArgs := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> fs &#123;</div><div class="line">		valueStrings = <span class="built_in">append</span>(valueStrings, <span class="string">"(?, ?, ?)"</span>)</div><div class="line"></div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.ID)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field1)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field2)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	smt := <span class="string">`INSERT INTO record_t(id, field1, field2) VALUES %s ON DUPLICATE KEY UPDATE field2=VALUES(field2)`</span></div><div class="line"></div><div class="line">	smt = fmt.Sprintf(smt, strings.Join(valueStrings, <span class="string">","</span>))</div><div class="line"></div><div class="line">	tx := db.Conn.Begin()</div><div class="line">	<span class="keyword">if</span> err := tx.Exec(smt, valueArgs...).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		tx.Rollback()</div><div class="line">		<span class="keyword">return</span> err</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	tx.Commit()</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="Bulk-Query"><a href="#Bulk-Query" class="headerlink" title="Bulk Query"></a>Bulk Query</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetRecordList</span><span class="params">(idList []<span class="keyword">string</span>)</span> <span class="params">([]*YourRecord, error)</span></span> &#123;</div><div class="line">	rs := []*YourRecord&#123;&#125;</div><div class="line"></div><div class="line">	placeHolders := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	args := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line">	<span class="keyword">for</span> _, id := <span class="keyword">range</span> idList &#123;</div><div class="line">		placeHolders = <span class="built_in">append</span>(placeHolders, <span class="string">"?"</span>)</div><div class="line">		args = <span class="built_in">append</span>(args, id)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sql := <span class="string">`select id, field1, field2 from record_t where id in(%s)`</span></div><div class="line">	sql = fmt.Sprintf(sql, strings.Join(placeHolders, <span class="string">","</span>))</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err := db.Conn.Raw(sql, args...).Scan(&amp;rs).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> rs, <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/19/解决Dell-ubuntu16-04-没声音/">解决Dell ubuntu16.04 没声音</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月19日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。<br>解决办法如下:</p>
-<ul>
-<li><p>安装 pulseaudio</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get purge pulseaudio</div><div class="line">sudo apt-get clean &amp;&amp; sudo apt-get autoremove</div></pre></td></tr></table></figure>
-</li>
-<li><p>然后重启ubuntu</p>
-</li>
-<li><p>启动 &amp; 配置 pulseaudio</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse</div><div class="line">sudo apt-get install pulseaudio</div><div class="line">sudo alsa force-reload</div><div class="line">pavucontrol</div></pre></td></tr></table></figure>
-</li>
-<li><p>如何配置<br>参考: <a href="http://blog.csdn.net/darmao/article/details/77199442" target="_blank" rel="external">http://blog.csdn.net/darmao/article/details/77199442</a></p>
-</li>
-</ul>
-<p>终于有声音了。。。</p>
-<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
-<li><a href="https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04" target="_blank" rel="external">https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04</a></li>
-</ul>
-
         
       
     </div>
