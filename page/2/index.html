@@ -145,6 +145,44 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/08/31/bulk-insert-bulk-query-with-gorm/">bulk insert, bulk query with gorm</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年8月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h1 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">type</span> YourRecord <span class="keyword">struct</span> &#123;</div><div class="line">    ID        <span class="keyword">string</span>    <span class="string">`gorm:"size:36;primary_key"`</span></div><div class="line">	Field1    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field1"`</span></div><div class="line">	Field2    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field2;index"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(FileFieldCopy)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"record_t"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">BulkCreateRecords</span><span class="params">(rs []*YourRecord)</span> <span class="title">error</span></span> &#123;</div><div class="line">	valueStrings := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	valueArgs := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> fs &#123;</div><div class="line">		valueStrings = <span class="built_in">append</span>(valueStrings, <span class="string">"(?, ?, ?)"</span>)</div><div class="line"></div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.ID)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field1)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field2)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	smt := <span class="string">`INSERT INTO record_t(id, field1, field2) VALUES %s ON DUPLICATE KEY UPDATE field2=VALUES(field2)`</span></div><div class="line"></div><div class="line">	smt = fmt.Sprintf(smt, strings.Join(valueStrings, <span class="string">","</span>))</div><div class="line"></div><div class="line">	tx := db.Conn.Begin()</div><div class="line">	<span class="keyword">if</span> err := tx.Exec(smt, valueArgs...).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		tx.Rollback()</div><div class="line">		<span class="keyword">return</span> err</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	tx.Commit()</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Bulk-Query"><a href="#Bulk-Query" class="headerlink" title="Bulk Query"></a>Bulk Query</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetRecordList</span><span class="params">(idList []<span class="keyword">string</span>)</span> <span class="params">([]*YourRecord, error)</span></span> &#123;</div><div class="line">	rs := []*YourRecord&#123;&#125;</div><div class="line"></div><div class="line">	placeHolders := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	args := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line">	<span class="keyword">for</span> _, id := <span class="keyword">range</span> idList &#123;</div><div class="line">		placeHolders = <span class="built_in">append</span>(placeHolders, <span class="string">"?"</span>)</div><div class="line">		args = <span class="built_in">append</span>(args, id)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sql := <span class="string">`select id, field1, field2 from record_t where id in(%s)`</span></div><div class="line">	sql = fmt.Sprintf(sql, strings.Join(placeHolders, <span class="string">","</span>))</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err := db.Conn.Raw(sql, args...).Scan(&amp;rs).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> rs, <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/08/19/解决Dell-ubuntu16-04-没声音/">解决Dell ubuntu16.04 没声音</a>
         
       </h1>
