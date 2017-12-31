@@ -145,6 +145,45 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/12/31/2017-Year-end-summary/">2017 Year-end summary</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年12月31日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><strong><em>2017年还有20多分钟就结束了，想来今年和往年一样过的还是那样快。</em></strong><br><strong><em>回想今年发生了很多事，也学习到了许多新的东西(主要是技术方面的)。</em></strong><br><strong><em>2月份到了新公司，开始新的工作；很快的适应了工作。我觉得应用层的开发还是不难的，开发内容主要是业务逻辑和和一些库的使用，这和语言没有关系。但是有关系的是语言会影响你的思路，以及错误处理的方式。我对golang的错误处理实在是感受很不好，代码里充满了检查的错误的代码；也可能是我对这样处理错误的方式还没有理解透吧。而且golang实际开发的时候觉得不适合做复杂的业务逻辑。因为缺少必要的语法糖以及方便的库(怀念python). 其实作为一个刚入行不是很久的开发，对项目代码的组织几乎没有什么想法，导致代码挺乱的(代码组织不合理)。这个是下一年要补充的地方。</em></strong><br><strong><em>今年接触了elixir，学习了1个多月，然后没有坚持下去。但是 elixir 的编程方式，确实是让我惊叹的。尤其它的管道特性，让我感受到很流畅，相比于golang的调用function, 检查错误，返回错误的方式优雅不少。还有其他函数式的编程特性，比如map, reduce都是很强大，优雅的编程方式；还有基于Erlang的并发编程，嗯18年要好好学习一下😁。</em></strong><br><strong><em>今年家里还给介绍了俩相亲的女生，都是不欢而散。很奇怪，很诡异。猜不透女的在想啥。</em></strong><br><strong><em>今年在跟着一个博客学习写编译器(抄代码)，然后17年最后一个github项目用学来的代码写了一个表达式计算的项目。</em></strong></p>
+<p>其实这一年体会到了很多东西，学习到了很多东西，但是还是有很多没有该掌握的。加油吧。</p>
+<h1 id="Hello-2018"><a href="#Hello-2018" class="headerlink" title="Hello, 2018"></a>Hello, 2018</h1>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/11/20/opam-install-utop/">opam install utop</a>
         
       </h1>
@@ -496,48 +535,6 @@
   </article>
 
     
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/09/06/记一次上传依赖到git仓库的坑/">记一次上传依赖到git仓库的坑</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年9月6日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <hr>
-<p>golang 项目复制依赖到vendor包下面，第一上传忘记删除依赖的.git目录，然后pull下来，发现没有依赖的代码文件。<br>然后删除.git目录，但是git status显示没有变化。</p>
-<hr>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -rf vendor/github.com/dep_name</div><div class="line"></div><div class="line">govendor add +external</div></pre></td></tr></table></figure>
-<p>然后commit, push到仓库就可以了.</p>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
   </section>
 
   
@@ -612,7 +609,7 @@
      
       2015 - 
     
-    2017
+    2018
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>
