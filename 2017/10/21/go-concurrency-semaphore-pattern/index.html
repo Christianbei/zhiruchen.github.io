@@ -38,7 +38,7 @@
 <meta property="og:url" content="https://zhiruchen.github.io/2017/10/21/go-concurrency-semaphore-pattern/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
 <meta property="og:description" content="在main函数中开启一个用于计算的goroutine, 为了让main方法知道什么时候计算完成了，在compute方法中传入一个channel参数，在main方法中取channel的值. 12345678910111213141516func main() &amp;#123;	ch := make(chan int64)	go sum([]int64&amp;#123;1, 3, 4, 5, 6, 10&amp;#12">
-<meta property="og:updated_time" content="2017-10-21T03:40:02.460Z">
+<meta property="og:updated_time" content="2017-10-21T03:40:02.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go concurrency semaphore pattern">
 <meta name="twitter:description" content="在main函数中开启一个用于计算的goroutine, 为了让main方法知道什么时候计算完成了，在compute方法中传入一个channel参数，在main方法中取channel的值. 12345678910111213141516func main() &amp;#123;	ch := make(chan int64)	go sum([]int64&amp;#123;1, 3, 4, 5, 6, 10&amp;#12">

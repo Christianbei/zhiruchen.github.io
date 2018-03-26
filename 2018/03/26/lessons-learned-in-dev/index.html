@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="一个奇怪的bug"/>
+  <meta name="description" content="lessons learned in dev"/>
 
 
 
@@ -29,19 +29,19 @@
 
 
 
-<link rel="canonical" href="https://zhiruchen.github.io/2018/02/03/A-Strange-Bug-Of-Golang/"/>
+<link rel="canonical" href="https://zhiruchen.github.io/2018/03/26/lessons-learned-in-dev/"/>
 
 
-<meta name="description" content="在使用如下golang代码做查询数据库时候，测试的时候，进程一直hang住，打日志最后定位到err = rows.Scan(&amp;amp;instance.Field1, &amp;amp;instance.Field2, &amp;amp;instance.Field3)程序执行到这行就hang住了。怀疑是instance没有创建的原因(instance==nil), 修改为instance := &amp;amp;Som">
+<meta name="description" content="lesson 1程序配置项没有配置的时候要有一个默认值。比如调用其他服务的超时时间，防止没有配置的时候出错。 lesson 2接口变动要考虑兼容。 lesson 3单元测试要覆盖各种情况。 lesson 4打印错误日志很重要，通过日志找到错误原因。 lesson 5开始写代码前，确定好需求和业务逻辑，免的边测试边加/改需求。 lesson 6先搭架子，后实现具体的业务细节。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个奇怪的bug">
-<meta property="og:url" content="https://zhiruchen.github.io/2018/02/03/A-Strange-Bug-Of-Golang/index.html">
+<meta property="og:title" content="lessons learned in dev">
+<meta property="og:url" content="https://zhiruchen.github.io/2018/03/26/lessons-learned-in-dev/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
-<meta property="og:description" content="在使用如下golang代码做查询数据库时候，测试的时候，进程一直hang住，打日志最后定位到err = rows.Scan(&amp;amp;instance.Field1, &amp;amp;instance.Field2, &amp;amp;instance.Field3)程序执行到这行就hang住了。怀疑是instance没有创建的原因(instance==nil), 修改为instance := &amp;amp;Som">
-<meta property="og:updated_time" content="2018-02-03T14:03:30.000Z">
+<meta property="og:description" content="lesson 1程序配置项没有配置的时候要有一个默认值。比如调用其他服务的超时时间，防止没有配置的时候出错。 lesson 2接口变动要考虑兼容。 lesson 3单元测试要覆盖各种情况。 lesson 4打印错误日志很重要，通过日志找到错误原因。 lesson 5开始写代码前，确定好需求和业务逻辑，免的边测试边加/改需求。 lesson 6先搭架子，后实现具体的业务细节。">
+<meta property="og:updated_time" content="2018-03-26T13:33:02.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个奇怪的bug">
-<meta name="twitter:description" content="在使用如下golang代码做查询数据库时候，测试的时候，进程一直hang住，打日志最后定位到err = rows.Scan(&amp;amp;instance.Field1, &amp;amp;instance.Field2, &amp;amp;instance.Field3)程序执行到这行就hang住了。怀疑是instance没有创建的原因(instance==nil), 修改为instance := &amp;amp;Som">
+<meta name="twitter:title" content="lessons learned in dev">
+<meta name="twitter:description" content="lesson 1程序配置项没有配置的时候要有一个默认值。比如调用其他服务的超时时间，防止没有配置的时候出错。 lesson 2接口变动要考虑兼容。 lesson 3单元测试要覆盖各种情况。 lesson 4打印错误日志很重要，通过日志找到错误原因。 lesson 5开始写代码前，确定好需求和业务逻辑，免的边测试边加/改需求。 lesson 6先搭架子，后实现具体的业务细节。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -68,7 +68,7 @@
 
 
 
-    <title> 一个奇怪的bug · zbbbbbblog </title>
+    <title> lessons learned in dev · zbbbbbblog </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -149,24 +149,35 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          一个奇怪的bug
+          lessons learned in dev
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2018年2月3日
+          2018年3月26日
         </span>
       </div>
     </header>
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-1"><span class="toc-text">lesson 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-2"><span class="toc-text">lesson 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-3"><span class="toc-text">lesson 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-4"><span class="toc-text">lesson 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-5"><span class="toc-text">lesson 5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lesson-6"><span class="toc-text">lesson 6</span></a></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        <p>在使用如下golang代码做查询数据库时候，测试的时候，进程一直hang住，打日志最后定位到<code>err = rows.Scan(&amp;instance.Field1, &amp;instance.Field2, &amp;instance.Field3)</code><br>程序执行到这行就hang住了。怀疑是instance没有创建的原因(instance==nil), 修改为<code>instance := &amp;SomeStruct{}</code> 进程就不在hang住了。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">SQL := <span class="string">""</span></div><div class="line">rows, err := db.Query(SQL, primaryKey)</div><div class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">&#125;</div><div class="line"><span class="keyword">defer</span> rows.Close()</div><div class="line"></div><div class="line"><span class="keyword">for</span> rows.Next() &#123;</div><div class="line">    <span class="keyword">var</span> instance *SomeStruct  <span class="comment">// 修改为 instance := &amp;SomeStruct&#123;&#125;</span></div><div class="line">    err = rows.Scan(&amp;instance.Field1, &amp;instance.Field2, &amp;instance.Field3)</div><div class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>现在的问题是为啥instance没初始化，rows.Scan的时候不报错而是hang住了呢。</p>
+        <h2 id="lesson-1"><a href="#lesson-1" class="headerlink" title="lesson 1"></a>lesson 1</h2><p>程序配置项没有配置的时候要有一个默认值。比如调用其他服务的超时时间，防止没有配置的时候出错。</p>
+<h2 id="lesson-2"><a href="#lesson-2" class="headerlink" title="lesson 2"></a>lesson 2</h2><p>接口变动要考虑兼容。</p>
+<h2 id="lesson-3"><a href="#lesson-3" class="headerlink" title="lesson 3"></a>lesson 3</h2><p>单元测试要覆盖各种情况。</p>
+<h2 id="lesson-4"><a href="#lesson-4" class="headerlink" title="lesson 4"></a>lesson 4</h2><p>打印错误日志很重要，通过日志找到错误原因。</p>
+<h2 id="lesson-5"><a href="#lesson-5" class="headerlink" title="lesson 5"></a>lesson 5</h2><p>开始写代码前，确定好需求和业务逻辑，免的边测试边加/改需求。</p>
+<h2 id="lesson-6"><a href="#lesson-6" class="headerlink" title="lesson 6"></a>lesson 6</h2><p>先搭架子，后实现具体的业务细节。</p>
 
       
     </div>
@@ -188,15 +199,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/03/26/lessons-learned-in-dev/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">lessons learned in dev</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2017/12/31/2017-Year-end-summary/">
-        <span class="next-text nav-default">2017 Year-end summary</span>
+      <a class="next" href="/2018/02/03/A-Strange-Bug-Of-Golang/">
+        <span class="next-text nav-default">一个奇怪的bug</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
