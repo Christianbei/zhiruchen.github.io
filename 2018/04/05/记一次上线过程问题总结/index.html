@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="记一次上线过程问题总结"/>
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="zbbbbbblog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x" />
+
+
+
+<link rel="canonical" href="https://zhiruchen.github.io/2018/04/05/记一次上线过程问题总结/"/>
+
+
+<meta name="description" content="这次项目从开始对需求到上线出现了很多问题总结一下 有需求不明确，流程不清晰对于项目最终要达到的效果，在开始沟通需求的时候没有和产品沟通明白，导致后面在不停的找产品确认细节。其实在开始阶段就应该把这些细节性的东西捋一遍。确定要做哪些，具体实现什么。参与需求评审的人过少。  接口文档没有确定就开始开发其实在开始就应该和前端移动端沟通确定需要的接口，以及接口参数等细节。但是并没有。后面开发的时候接口文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次上线过程问题总结">
+<meta property="og:url" content="https://zhiruchen.github.io/2018/04/05/记一次上线过程问题总结/index.html">
+<meta property="og:site_name" content="zbbbbbblog">
+<meta property="og:description" content="这次项目从开始对需求到上线出现了很多问题总结一下 有需求不明确，流程不清晰对于项目最终要达到的效果，在开始沟通需求的时候没有和产品沟通明白，导致后面在不停的找产品确认细节。其实在开始阶段就应该把这些细节性的东西捋一遍。确定要做哪些，具体实现什么。参与需求评审的人过少。  接口文档没有确定就开始开发其实在开始就应该和前端移动端沟通确定需要的接口，以及接口参数等细节。但是并没有。后面开发的时候接口文档">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-04-04T23:56:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次上线过程问题总结">
+<meta name="twitter:description" content="这次项目从开始对需求到上线出现了很多问题总结一下 有需求不明确，流程不清晰对于项目最终要达到的效果，在开始沟通需求的时候没有和产品沟通明白，导致后面在不停的找产品确认细节。其实在开始阶段就应该把这些细节性的东西捋一遍。确定要做哪些，具体实现什么。参与需求评审的人过少。  接口文档没有确定就开始开发其实在开始就应该和前端移动端沟通确定需要的接口，以及接口参数等细节。但是并没有。后面开发的时候接口文档">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: false,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 记一次上线过程问题总结 · zbbbbbblog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">zbbbbbblog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">zbbbbbblog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          记一次上线过程问题总结
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018年4月5日
+        </span>
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#这次项目从开始对需求到上线出现了很多问题总结一下"><span class="toc-text">这次项目从开始对需求到上线出现了很多问题总结一下</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#以后的改进"><span class="toc-text">以后的改进</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h1 id="这次项目从开始对需求到上线出现了很多问题总结一下"><a href="#这次项目从开始对需求到上线出现了很多问题总结一下" class="headerlink" title="这次项目从开始对需求到上线出现了很多问题总结一下"></a>这次项目从开始对需求到上线出现了很多问题总结一下</h1><ul>
+<li><p>有需求不明确，流程不清晰<br>对于项目最终要达到的效果，在开始沟通需求的时候没有和产品沟通明白，导致后面在不停的找产品确认细节。其实在开始阶段就应该把这些细节性的东西捋一遍。确定要做哪些，具体实现什么。参与需求评审的人过少。</p>
+</li>
+<li><p>接口文档没有确定就开始开发<br>其实在开始就应该和前端移动端沟通确定需要的接口，以及接口参数等细节。但是并没有。后面开发的时候接口文档也没有及时更新，导致前后端在不停在这个上浪费时间。</p>
+</li>
+<li><p>接口版本管理<br>对于不兼容的接口应该新加新版本的接口，然后新功能就通过这个接口来操作。而不是用老的接口兼容旧的数据。</p>
+</li>
+<li><p>接口文档不详细，更新不及时<br>就是懒</p>
+</li>
+<li><p>最大的问题还是产品，前后端沟通不充分就去开发<br>会导致以上几个问题</p>
+</li>
+<li><p>工期被缩短，临时加需求<br>导致开发时间紧张。在沟通阶段就因该确定一个不能加需求的时间点；过了就不能加需求了。不然对大家都会有影响。</p>
+</li>
+</ul>
+<h2 id="以后的改进"><a href="#以后的改进" class="headerlink" title="以后的改进"></a>以后的改进</h2><ul>
+<li><p>有需求，先对需求；一条条对，确定要实现什么。</p>
+</li>
+<li><p>前后端在开发之前先把接口确定下来；需要哪些接口; 参数是什么。</p>
+</li>
+<li><p>及时更新接口文档。</p>
+</li>
+<li><p>不兼容的接口，就新加新的版本的接口。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/03/26/lessons-learned-in-dev/">
+        <span class="next-text nav-default">lessons learned in dev</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">zhiruchen</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>

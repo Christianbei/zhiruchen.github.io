@@ -38,6 +38,7 @@
 <meta property="og:url" content="https://zhiruchen.github.io/2017/09/06/记一次上传依赖到git仓库的坑/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
 <meta property="og:description" content="golang 项目复制依赖到vendor包下面，第一上传忘记删除依赖的.git目录，然后pull下来，发现没有依赖的代码文件。然后删除.git目录，但是git status显示没有变化。  解决办法123git rm -rf vendor/github.com/dep_namegovendor add +external 然后commit, push到仓库就可以了.">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2017-09-06T01:07:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次上传依赖到git仓库的坑">
@@ -175,7 +176,7 @@
         <hr>
 <p>golang 项目复制依赖到vendor包下面，第一上传忘记删除依赖的.git目录，然后pull下来，发现没有依赖的代码文件。<br>然后删除.git目录，但是git status显示没有变化。</p>
 <hr>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -rf vendor/github.com/dep_name</div><div class="line"></div><div class="line">govendor add +external</div></pre></td></tr></table></figure>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -rf vendor/github.com/dep_name</span><br><span class="line"></span><br><span class="line">govendor add +external</span><br></pre></td></tr></table></figure>
 <p>然后commit, push到仓库就可以了.</p>
 
       

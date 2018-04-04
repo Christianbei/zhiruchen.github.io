@@ -34,6 +34,7 @@
 <meta property="og:title" content="zbbbbbblog">
 <meta property="og:url" content="https://zhiruchen.github.io/page/2/index.html">
 <meta property="og:site_name" content="zbbbbbblog">
+<meta property="og:locale" content="zh-cn">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zbbbbbblog">
 
@@ -145,6 +146,43 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/09/12/golang-负数-取模/">golang 负数 取模</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年9月12日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/09/11/go-chi-request-data-validator-middleware/">go-chi request data validator middleware</a>
         
       </h1>
@@ -248,7 +286,7 @@
           <hr>
 <p>golang 项目复制依赖到vendor包下面，第一上传忘记删除依赖的.git目录，然后pull下来，发现没有依赖的代码文件。<br>然后删除.git目录，但是git status显示没有变化。</p>
 <hr>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git rm -rf vendor/github.com/dep_name</div><div class="line"></div><div class="line">govendor add +external</div></pre></td></tr></table></figure>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -rf vendor/github.com/dep_name</span><br><span class="line"></span><br><span class="line">govendor add +external</span><br></pre></td></tr></table></figure>
 <p>然后commit, push到仓库就可以了.</p>
 
         
@@ -287,8 +325,8 @@
         
 
         
-          <h1 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">type</span> YourRecord <span class="keyword">struct</span> &#123;</div><div class="line">    ID        <span class="keyword">string</span>    <span class="string">`gorm:"size:36;primary_key"`</span></div><div class="line">	Field1    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field1"`</span></div><div class="line">	Field2    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field2;index"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(FileFieldCopy)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"record_t"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">BulkCreateRecords</span><span class="params">(rs []*YourRecord)</span> <span class="title">error</span></span> &#123;</div><div class="line">	valueStrings := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	valueArgs := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> fs &#123;</div><div class="line">		valueStrings = <span class="built_in">append</span>(valueStrings, <span class="string">"(?, ?, ?)"</span>)</div><div class="line"></div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.ID)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field1)</div><div class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field2)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	smt := <span class="string">`INSERT INTO record_t(id, field1, field2) VALUES %s ON DUPLICATE KEY UPDATE field2=VALUES(field2)`</span></div><div class="line"></div><div class="line">	smt = fmt.Sprintf(smt, strings.Join(valueStrings, <span class="string">","</span>))</div><div class="line"></div><div class="line">	tx := db.Conn.Begin()</div><div class="line">	<span class="keyword">if</span> err := tx.Exec(smt, valueArgs...).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		tx.Rollback()</div><div class="line">		<span class="keyword">return</span> err</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	tx.Commit()</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Bulk-Query"><a href="#Bulk-Query" class="headerlink" title="Bulk Query"></a>Bulk Query</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetRecordList</span><span class="params">(idList []<span class="keyword">string</span>)</span> <span class="params">([]*YourRecord, error)</span></span> &#123;</div><div class="line">	rs := []*YourRecord&#123;&#125;</div><div class="line"></div><div class="line">	placeHolders := []<span class="keyword">string</span>&#123;&#125;</div><div class="line">	args := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</div><div class="line">	<span class="keyword">for</span> _, id := <span class="keyword">range</span> idList &#123;</div><div class="line">		placeHolders = <span class="built_in">append</span>(placeHolders, <span class="string">"?"</span>)</div><div class="line">		args = <span class="built_in">append</span>(args, id)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sql := <span class="string">`select id, field1, field2 from record_t where id in(%s)`</span></div><div class="line">	sql = fmt.Sprintf(sql, strings.Join(placeHolders, <span class="string">","</span>))</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err := db.Conn.Raw(sql, args...).Scan(&amp;rs).Error; err != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> rs, <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <h1 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> YourRecord <span class="keyword">struct</span> &#123;</span><br><span class="line">    ID        <span class="keyword">string</span>    <span class="string">`gorm:"size:36;primary_key"`</span></span><br><span class="line">	Field1    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field1"`</span></span><br><span class="line">	Field2    <span class="keyword">string</span>    <span class="string">`gorm:"type:varchar(32);column:field2;index"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(FileFieldCopy)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"record_t"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BulkCreateRecords</span><span class="params">(rs []*YourRecord)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	valueStrings := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">	valueArgs := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> fs &#123;</span><br><span class="line">		valueStrings = <span class="built_in">append</span>(valueStrings, <span class="string">"(?, ?, ?)"</span>)</span><br><span class="line"></span><br><span class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.ID)</span><br><span class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field1)</span><br><span class="line">		valueArgs = <span class="built_in">append</span>(valueArgs, f.Field2)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	smt := <span class="string">`INSERT INTO record_t(id, field1, field2) VALUES %s ON DUPLICATE KEY UPDATE field2=VALUES(field2)`</span></span><br><span class="line"></span><br><span class="line">	smt = fmt.Sprintf(smt, strings.Join(valueStrings, <span class="string">","</span>))</span><br><span class="line"></span><br><span class="line">	tx := db.Conn.Begin()</span><br><span class="line">	<span class="keyword">if</span> err := tx.Exec(smt, valueArgs...).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">		tx.Rollback()</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx.Commit()</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Bulk-Query"><a href="#Bulk-Query" class="headerlink" title="Bulk Query"></a>Bulk Query</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetRecordList</span><span class="params">(idList []<span class="keyword">string</span>)</span> <span class="params">([]*YourRecord, error)</span></span> &#123;</span><br><span class="line">	rs := []*YourRecord&#123;&#125;</span><br><span class="line"></span><br><span class="line">	placeHolders := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">	args := []<span class="keyword">interface</span>&#123;&#125;&#123;&#125;</span><br><span class="line">	<span class="keyword">for</span> _, id := <span class="keyword">range</span> idList &#123;</span><br><span class="line">		placeHolders = <span class="built_in">append</span>(placeHolders, <span class="string">"?"</span>)</span><br><span class="line">		args = <span class="built_in">append</span>(args, id)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	sql := <span class="string">`select id, field1, field2 from record_t where id in(%s)`</span></span><br><span class="line">	sql = fmt.Sprintf(sql, strings.Join(placeHolders, <span class="string">","</span>))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := db.Conn.Raw(sql, args...).Scan(&amp;rs).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> rs, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
       
     </div>
@@ -328,19 +366,19 @@
           <p>在我的Dell上装完16.04后，声卡出问题，windows 和 ubuntu都没声音了。<br>解决办法如下:</p>
 <ul>
 <li><p>安装 pulseaudio</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get purge pulseaudio</div><div class="line">sudo apt-get clean &amp;&amp; sudo apt-get autoremove</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge pulseaudio</span><br><span class="line">sudo apt-get clean &amp;&amp; sudo apt-get autoremove</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>然后重启ubuntu</p>
 </li>
 <li><p>启动 &amp; 配置 pulseaudio</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse</div><div class="line">sudo apt-get install pulseaudio</div><div class="line">sudo alsa force-reload</div><div class="line">pavucontrol</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -r ~/.pulse ~/.asound* ~/.pulse-cookie ~/.config/pulse</span><br><span class="line">sudo apt-get install pulseaudio</span><br><span class="line">sudo alsa force-reload</span><br><span class="line">pavucontrol</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如何配置<br>参考: <a href="http://blog.csdn.net/darmao/article/details/77199442" target="_blank" rel="external">http://blog.csdn.net/darmao/article/details/77199442</a></p>
+<li><p>如何配置<br>参考: <a href="http://blog.csdn.net/darmao/article/details/77199442" target="_blank" rel="noopener">http://blog.csdn.net/darmao/article/details/77199442</a></p>
 </li>
 </ul>
 <p>终于有声音了。。。</p>
 <h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
-<li><a href="https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04" target="_blank" rel="external">https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04</a></li>
+<li><a href="https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04" target="_blank" rel="noopener">https://askubuntu.com/questions/426648/how-to-reinstall-pulseaudio-ubuntu-12-04</a></li>
 </ul>
 
         
@@ -379,7 +417,7 @@
         
 
         
-          <p>ref: <a href="https://www.zhihu.com/lives/879002504849915904" target="_blank" rel="external">https://www.zhihu.com/lives/879002504849915904</a></p>
+          <p>ref: <a href="https://www.zhihu.com/lives/879002504849915904" target="_blank" rel="noopener">https://www.zhihu.com/lives/879002504849915904</a></p>
 <h1 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h1><ul>
 <li>乐观</li>
 <li>建立自信</li>
@@ -474,7 +512,7 @@
 <li>拷贝可执行二进制文件, 配置文件, supervisor的配置到目标机器</li>
 <li>supervisor的配置</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[program:app_name]</div><div class="line">command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.toml</div><div class="line">directory=/data/apps/app_name</div><div class="line">autostart=true</div><div class="line">autorestart=true</div><div class="line">startsecs=10</div><div class="line">startretries=3</div><div class="line">stdout_logfile=/data/logs/supervisor/app_name/access.log</div><div class="line">stdout_logfile_maxbytes=100MB</div><div class="line">stdout_logfile_backups=20</div><div class="line">stderr_logfile=/data/logs/supervisor/app_name/stderr.log</div><div class="line">stderr_logfile_maxbytes=100MB</div><div class="line">stderr_logfile_backups=2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[program:app_name]</span><br><span class="line">command=/data/apps/app_name/bin/app_name --config /data/apps/app_name/conf/config.app_name.toml</span><br><span class="line">directory=/data/apps/app_name</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">startsecs=10</span><br><span class="line">startretries=3</span><br><span class="line">stdout_logfile=/data/logs/supervisor/app_name/access.log</span><br><span class="line">stdout_logfile_maxbytes=100MB</span><br><span class="line">stdout_logfile_backups=20</span><br><span class="line">stderr_logfile=/data/logs/supervisor/app_name/stderr.log</span><br><span class="line">stderr_logfile_maxbytes=100MB</span><br><span class="line">stderr_logfile_backups=2</span><br></pre></td></tr></table></figure>
 <ul>
 <li>更新supervisor配置</li>
 </ul>
@@ -520,50 +558,7 @@
         
 
         
-          <h1 id="golang-多线程同步"><a href="#golang-多线程同步" class="headerlink" title="golang 多线程同步"></a>golang 多线程同步</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/08/02/golang-mysql-timestamp/">golang mysql timestamp</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年8月2日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>问题:</p>
-<p>​        通过gorm创建一条记录后，创建时间的unix_timestamp值比当前的时间的时间戳还大。</p>
-<p>原因:</p>
-<p>​       查看连接数据库的dsn: <code>&quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=Local&amp;parseTime=true&quot;</code>,创建记录的时候的时间戳是本地时间的，但是计算Duration的时候使用utc的当前时间戳减去记录的时间戳，Duration变成负值。</p>
-<p>解决:</p>
-<p>​     dsn改为: <code>%s:%s@tcp(%s)/%s?charset=utf8&amp;loc=UTC&amp;parseTime=true</code></p>
-
+          <h1 id="golang-多线程同步"><a href="#golang-多线程同步" class="headerlink" title="golang 多线程同步"></a>golang 多线程同步</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
         
       
     </div>
