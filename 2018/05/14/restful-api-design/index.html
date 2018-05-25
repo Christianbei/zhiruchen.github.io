@@ -1,3 +1,32 @@
 <!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> restful api design · zbbbbbblog</title><meta name="description" content="restful api design - zhiruchen"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://zhiruchen.github.io/atom.xml" title="zbbbbbblog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/zhiruchen" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">restful api design</h1><div class="post-info">2018年5月14日</div><div class="post-content"><h1 id="restful-风格接口设计"><a href="#restful-风格接口设计" class="headerlink" title="restful 风格接口设计"></a>restful 风格接口设计</h1><h2 id="restful"><a href="#restful" class="headerlink" title="restful"></a>restful</h2><p><a href="https://www.wikiwand.com/zh/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2" target="_blank" rel="noopener">Representational State Transfer 表现层状态转换</a></p>
-<p>## </p>
+<h2 id="用名字复数表示资源，以HTTP方法表示操作"><a href="#用名字复数表示资源，以HTTP方法表示操作" class="headerlink" title="用名字复数表示资源，以HTTP方法表示操作"></a>用名字复数表示资源，以HTTP方法表示操作</h2><p>以公司和员工为例</p>
+<ul>
+<li><p>创建一个公司: <code>POST /api/v1.0/companies</code></p>
+</li>
+<li><p>获取公司列表: <code>GET /api/v1.0/companies</code></p>
+</li>
+<li><p>获取某个公司: <code>GET /api/v1.0/companies/:id</code></p>
+</li>
+<li><p>删除某个公司: <code>DELETE /api/v1.0/companies/:id</code></p>
+</li>
+<li><p>更新某个公司信息: <code>PUT /api/v1.0/companies/:id</code></p>
+</li>
+<li><p>获取公司下的员工们: <code>GET /api/v1.0/companies/:company_id/employees</code></p>
+</li>
+<li><p>创建一个员工: <code>POST /api/v1.0/companies/:company_id/employees</code></p>
+</li>
+<li><p>获取某个员工信息: <code>GET /api/v1.0/companies/:company_id/employees/:employee_id</code></p>
+</li>
+<li><p>删除某个员工信息: <code>DELETE /api/v1.0/companies/:company_id/employees/:employee_id</code></p>
+</li>
+<li><p>更新某个员工信息: <code>PUT /api/v1.0/companies/:company_id/employees/:employee_id</code></p>
+</li>
+</ul>
+<h2 id="排序，过滤，分页"><a href="#排序，过滤，分页" class="headerlink" title="排序，过滤，分页"></a>排序，过滤，分页</h2><p>排序</p>
+<p>可以在GET URL中指定要排序的字段以及顺序<br><code>GET /api/v1.0/companies?field=created_at&amp;order=desc</code></p>
+<p>过滤</p>
+<p>按照 cit和 location过滤<br><code>GET /api/v1.0/companies?city=北京&amp;location=望京</code></p>
+<p>分页</p>
+<p>指定offset和limit<br><code>GET /api/v1.0/companies?offset=0&amp;limit=100</code></p>
+<p><code>GET /api/v1.0/companies?offset=99&amp;limit=100</code></p>
 </div></article></div></main><footer><div class="paginator"><a href="/2018/05/16/go-包管理工具/" class="prev">上一篇</a><a href="/2018/05/14/go-with-redis/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://zhiruchen.github.io">zhiruchen</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
