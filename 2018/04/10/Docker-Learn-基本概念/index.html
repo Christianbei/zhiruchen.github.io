@@ -1,1 +1,31 @@
-<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Docker Learn - 基本概念 · zbbbbbblog</title><meta name="description" content="Docker Learn - 基本概念 - zhiruchen"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://zhiruchen.github.io/atom.xml" title="zbbbbbblog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/zhiruchen" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Docker Learn - 基本概念</h1><div class="post-info">2018年4月10日</div><div class="post-content"><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2></div></article></div></main><footer><div class="paginator"><a href="/2018/04/16/golang-Reflect-使用/" class="prev">上一篇</a><a href="/2018/04/05/记一次上线过程问题总结/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://zhiruchen.github.io">zhiruchen</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Docker Learn · zbbbbbblog</title><meta name="description" content="Docker Learn - zhiruchen"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://zhiruchen.github.io/atom.xml" title="zbbbbbblog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/zhiruchen" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Docker Learn</h1><div class="post-info">2018年4月10日</div><div class="post-content"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><ul>
+<li>特殊的文件系统</li>
+<li>提供容器运行时所需的程序，资源，数据，配置等</li>
+</ul>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><ul>
+<li>镜像运行时的实体</li>
+<li>是一种特殊的进程</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>docker build 从Dokcerfile构建镜像</li>
+</ul>
+<p><code>docker build -t app:v1 .</code></p>
+<ul>
+<li>docker run 运行容器</li>
+</ul>
+<p><code>docker run -d -p 80:80 webserver:v1</code></p>
+<ul>
+<li><p>dokcer images 列出镜像列表</p>
+</li>
+<li><p>docker container ls  列出容器</p>
+</li>
+<li><p>docker rmi 删除镜像</p>
+</li>
+<li>docker rm 删除容器</li>
+<li>docker exec -it ubuntu:18.04 bash 在ubuntu:18.04这个容器里运行bash</li>
+</ul>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><h3 id="FROM-指定基础镜像"><a href="#FROM-指定基础镜像" class="headerlink" title="FROM 指定基础镜像"></a>FROM 指定基础镜像</h3><p><code>FROM ubuntu:18.04</code></p>
+<h3 id="COPY-拷贝当前上下文中的文件到容器里"><a href="#COPY-拷贝当前上下文中的文件到容器里" class="headerlink" title="COPY 拷贝当前上下文中的文件到容器里"></a>COPY 拷贝当前上下文中的文件到容器里</h3><p><code>COPY bin/app /data/apps/myapp/bin/</code><br><code>COPY conf/config.toml /data/apps/myapp/conf/</code></p>
+<h3 id="EXPOSE-申明要使用的端口"><a href="#EXPOSE-申明要使用的端口" class="headerlink" title="EXPOSE 申明要使用的端口"></a>EXPOSE 申明要使用的端口</h3><p><code>EXPOSE 80 443</code></p>
+<h3 id="ENTRYPOINT-指定容器启动程序以及参数"><a href="#ENTRYPOINT-指定容器启动程序以及参数" class="headerlink" title="ENTRYPOINT 指定容器启动程序以及参数"></a>ENTRYPOINT 指定容器启动程序以及参数</h3><p><code>ENTRYPOINT [&quot;/data/apps/myapp/bin/app&quot;, &quot;-p&quot;, &quot;:8080&quot;, &quot;-conf&quot;, &quot;/data/apps/myapp/conf/config.toml&quot;]</code></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/16/golang-Reflect-使用/" class="prev">上一篇</a><a href="/2018/04/05/记一次上线过程问题总结/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://zhiruchen.github.io">zhiruchen</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
