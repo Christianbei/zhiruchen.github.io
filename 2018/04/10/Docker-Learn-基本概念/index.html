@@ -19,10 +19,10 @@
 </li>
 <li><p>docker container ls  列出容器</p>
 </li>
-<li><p>docker rmi 删除镜像</p>
+<li><p><code>docker rmi image_id</code> 删除镜像</p>
 </li>
-<li>docker rm 删除容器</li>
-<li>docker exec -it ubuntu:18.04 bash 在ubuntu:18.04这个容器里运行bash</li>
+<li><code>docker rm  container_id</code> 删除容器</li>
+<li><code>docker exec -it ubuntu:18.04 bash</code> 在ubuntu:18.04容器里运行bash</li>
 </ul>
 <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><h3 id="FROM-指定基础镜像"><a href="#FROM-指定基础镜像" class="headerlink" title="FROM 指定基础镜像"></a>FROM 指定基础镜像</h3><p><code>FROM ubuntu:18.04</code></p>
 <h3 id="COPY-拷贝当前上下文中的文件到容器里"><a href="#COPY-拷贝当前上下文中的文件到容器里" class="headerlink" title="COPY 拷贝当前上下文中的文件到容器里"></a>COPY 拷贝当前上下文中的文件到容器里</h3><p><code>COPY bin/app /data/apps/myapp/bin/</code><br><code>COPY conf/config.toml /data/apps/myapp/conf/</code></p>
