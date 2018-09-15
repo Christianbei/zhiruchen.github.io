@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Golang Interview Questions part II · zbbbbbblog</title><meta name="description" content="Golang Interview Questions part II - zhiruchen"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://zhiruchen.github.io/atom.xml" title="zbbbbbblog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/zhiruchen" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Golang Interview Questions part II</h1><div class="post-info">2018年9月15日</div><div class="post-content"><h1 id="09-14-面试总结"><a href="#09-14-面试总结" class="headerlink" title="09-14 面试总结"></a>09-14 面试总结</h1><h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p>公司1</p>
+<ul>
+<li>介绍项目，项目的一些细节问题</li>
+<li>定时任务处理设计</li>
+<li>对k8s的理解</li>
+<li>golang一些基础知识</li>
+<li>mysql 的联合索引的使用情况</li>
+<li>golang 锁知道的有哪些(互斥锁，读写锁)</li>
+<li>goroutine 什么时候会触发调度<ul>
+<li>channel阻塞的时候</li>
+<li>写入磁盘的时候</li>
+<li>从网络读写数据的时候</li>
+<li>runtime GoSched 方法</li>
+<li>Lock 临界区的时候</li>
+</ul>
+</li>
+<li><p>select 和 epoll 的区别</p>
+<ul>
+<li>支持的fd的数量不同</li>
+<li>等等</li>
+</ul>
+</li>
+<li><p>MySQL 数据库隔离级别</p>
+<ul>
+<li>未提交读 脏读</li>
+<li>提交读</li>
+<li>可重复读 幻读</li>
+<li>串行化</li>
+</ul>
+</li>
+<li><p>MySQL 如何解决的幻读</p>
+<ul>
+<li>用的间隙锁(啥是间隙锁)</li>
+</ul>
+</li>
+<li><p>Golang make vs new</p>
+</li>
+<li><p>lock 和 atomic 那个快</p>
+<ul>
+<li>atomic 因为是硬件级别的</li>
+</ul>
+</li>
+<li><p>Goroutine 的调度, M 的最大个数(1万)</p>
+<ul>
+<li>G M P 结构 </li>
+</ul>
+</li>
+</ul>
+<p>公司2</p>
+<ul>
+<li>介绍项目</li>
+<li>请求调用方式</li>
+<li>golang slice 和 数组的区别</li>
+<li>lru 如何实现</li>
+<li>nginx 是否了解</li>
+<li>websocket 是否了解</li>
+<li>对Linux的了解</li>
+<li>对NSQ的理解</li>
+<li><p>NSQ 同步数据异常处理，超时控制</p>
+<ul>
+<li>异常处理用defer, 每个goroutine一个defer</li>
+<li><p>超时控制用channel</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &#123;</span><br><span class="line"><span class="keyword">case</span> &lt;-ch:</span><br><span class="line"><span class="keyword">case</span> &lt;-time.After(<span class="number">5</span> * time.Second):</span><br><span class="line">	 <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>用两个栈实现一个队列</li>
+<li>二叉查找树的时间复杂度 O(logn)</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/09/13/Golang-Interview-Questions/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://zhiruchen.github.io">zhiruchen</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
